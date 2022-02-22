@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Messages from './Messages';
-import MessageInput from './MessageInput';
+import MessageInput from './MessagesInput';
 
 import './App.css';
 
