@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import io from 'socket.io-client';
 import Messages from './Messages';
 import MessageInput from './MessagesInput';
+import UsernameInput from './Components/UsernameInput'
 
 import './App.css';
 
@@ -19,6 +20,9 @@ function App() {
       <header className="app-header">
         React Chat
       </header>
+
+      <UsernameInput socket={socket} />
+      
       { socket ? (
         <div className="chat-container">
           <Messages socket={socket} />
