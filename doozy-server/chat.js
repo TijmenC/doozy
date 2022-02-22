@@ -25,6 +25,7 @@ class Connection {
   
   sendMessage(message) {
     this.io.sockets.emit('message', message);
+    console.log(message.value)
   }
   
   getMessages() {
