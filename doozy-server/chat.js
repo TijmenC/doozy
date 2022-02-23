@@ -12,11 +12,17 @@ const defaultUser = {
 
 const messageExpirationTimeMS = 5*60 * 1000;
 
+class User {
+  constructor(username, id) {
+    this.username = username;
+    this.id = id;
+  }
+}
+
 class Connection {
   constructor(io, socket) {
     this.socket = socket;
     this.io = io;
-   
 
     socket.on('getMessages', () => this.getMessages());
     socket.on('message', (value) => this.handleMessage(value));
@@ -29,12 +35,13 @@ class Connection {
   
   sendMessage(message) {
     this.io.sockets.emit('message', message);
-    console.log(message.value)
   }
 
   setUsername(username) {
-   defaultUser.name = username
-    console.log(defaultUser.name)
+    users.set(this.socket, {
+      id: 3,
+      name: username,
+    });
   }
   
   getMessages() {
