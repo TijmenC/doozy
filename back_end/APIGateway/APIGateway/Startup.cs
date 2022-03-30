@@ -16,6 +16,10 @@ namespace APIGateway
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -29,12 +33,11 @@ namespace APIGateway
             app.UseRouting();
 
 
-            app.UseEndpoints(endpoints =>
+            Router router = new Router("routes.json");
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                var content = await router.RouteRequest(context.Request);
+                await context.Response.WriteAsync(await content.Content.ReadAsStringAsync());
             });
         }
     }
