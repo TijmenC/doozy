@@ -28,6 +28,7 @@ namespace APIGateway
 
             app.UseRouting();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
