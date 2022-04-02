@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.
 using PostsMicroservice.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,8 +22,8 @@ namespace PostsMicroservice
         {
             services.AddDbContext<PostContext>(opt =>
               opt.UseInMemoryDatabase("PostMicroserviceDB"));
-
             services.AddControllers();
+            services.AddCors();
 
         }
 
@@ -36,7 +35,9 @@ namespace PostsMicroservice
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //DISABLE WHILE IN PRODUCTION!
+
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
 

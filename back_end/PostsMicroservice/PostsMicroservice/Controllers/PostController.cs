@@ -10,30 +10,30 @@ namespace PostsMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuestionController : ControllerBase
+    public class PostController : ControllerBase
     {
         private readonly PostContext _context;
 
-        public QuestionController(PostContext context)
+        public PostController(PostContext context)
         {
             _context = context;
         }
 
-        // GET: api/Question/5
+        // GET: api/Post/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostDTO>> GetQuestion(int id)
+        public async Task<ActionResult<PostDTO>> GetPost(int id)
         {
-            var question = await _context.Posts.FindAsync(id);
+            var post = await _context.Posts.FindAsync(id);
 
-            if (question == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            return QuestionToDTO(question);
+            return PostToDTO(post);
         }
 
-        private static PostDTO QuestionToDTO(Post todoItem) =>
+        private static PostDTO PostToDTO(Post todoItem) =>
       new PostDTO
       {
           Id = todoItem.Id,
