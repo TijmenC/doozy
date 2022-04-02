@@ -1,16 +1,9 @@
 {
   "routes": [
     {
-      "endpoint": "/movies",
+      "endpoint": "/weatherforecast",
       "destination": {
-        "uri": "http://localhost:8090/movies/",
-        "requiresAuthentication": "true"
-      }
-    },
-    {
-      "endpoint": "/songs",
-      "destination": {
-        "uri": "http://localhost:8091/songs/",
+        "uri": "https://localhost:49155/weatherforecast/",
         "requiresAuthentication": "false"
       }
     }

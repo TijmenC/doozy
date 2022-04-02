@@ -11,39 +11,24 @@ namespace APIGateway
 {
     public class Destination
     {
-        public string Uri { get; set; }
+        public string Path { get; set; }
         public bool RequiresAuthentication { get; set; }
         static HttpClient client = new HttpClient();
-
         public Destination(string uri, bool requiresAuthentication)
         {
-            Uri = uri;
+            Path = uri;
             RequiresAuthentication = requiresAuthentication;
         }
 
-        public Destination(string uri)
-            : this(uri, false)
+        public Destination(string path)
+            : this(path, false)
         {
         }
 
         private Destination()
         {
-            Uri = "/";
+            Path = "/";
             RequiresAuthentication = false;
-        }
-
-        private string CreateDestinationUri(HttpRequest request)
-        {
-            string requestPath = request.Path.ToString();
-            string queryString = request.QueryString.ToString();
-
-            string endpoint = "";
-            string[] endpointSplit = requestPath.Substring(1).Split('/');
-
-            if (endpointSplit.Length > 1)
-                endpoint = endpointSplit[1];
-
-            return Uri + endpoint + queryString;
         }
 
         public async Task<HttpResponseMessage> SendRequest(HttpRequest request)
@@ -66,5 +51,21 @@ namespace APIGateway
                 }
             }
         }
+
+        private string CreateDestinationUri(HttpRequest request)
+        {
+            string requestPath = request.Path.ToString();
+            string queryString = request.QueryString.ToString();
+
+            string endpoint = "";
+            string[] endpointSplit = requestPath.Substring(1).Split('/');
+
+            if (endpointSplit.Length > 1)
+                endpoint = endpointSplit[1];
+
+
+            return Path + endpoint + queryString;
+        }
+
     }
 }

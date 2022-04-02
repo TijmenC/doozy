@@ -11,6 +11,7 @@ namespace APIGateway
 {
     public class Router
     {
+
         public List<Route> Routes { get; set; }
         public Destination AuthenticationService { get; set; }
 
@@ -23,7 +24,6 @@ namespace APIGateway
             AuthenticationService = JsonLoader.Deserialize<Destination>(Convert.ToString(router.authenticationService));
 
         }
-
 
         public async Task<HttpResponseMessage> RouteRequest(HttpRequest request)
         {
@@ -60,5 +60,6 @@ namespace APIGateway
             };
             return errorMessage;
         }
+
     }
 }
