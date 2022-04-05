@@ -2,7 +2,9 @@ version: '3.4'
 
 services:
   postsmicroservice:
-    image: ${DOCKER_REGISTRY-}postsmicroservice
+    image: ${DOCKER_REGISTRY-}postsmicroservice:${TAG:-latest}
     build:
       context: .
       dockerfile: back_end/PostsMicroservice/PostsMicroservice/Dockerfile
+    depends_on:
+      - sqldata
