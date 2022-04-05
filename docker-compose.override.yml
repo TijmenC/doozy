@@ -7,3 +7,4 @@ services:
       - ASPNETCORE_URLS=https://+:443;http://+:80
     ports:
       - "5001:80"
+      - "5002:443"

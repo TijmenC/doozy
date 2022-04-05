@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostsMicroservice", "back_e
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{37F85D7B-5086-4850-81C6-D99B2E147183}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotAPIGateway", "back_end\OcelotAPIGateway\OcelotAPIGateway.csproj", "{0849EE16-0B61-42B9-9D22-48C60C59ADB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{37F85D7B-5086-4850-81C6-D99B2E147183}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{37F85D7B-5086-4850-81C6-D99B2E147183}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{37F85D7B-5086-4850-81C6-D99B2E147183}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0849EE16-0B61-42B9-9D22-48C60C59ADB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0849EE16-0B61-42B9-9D22-48C60C59ADB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0849EE16-0B61-42B9-9D22-48C60C59ADB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0849EE16-0B61-42B9-9D22-48C60C59ADB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
