@@ -4,7 +4,14 @@ services:
   postsmicroservice:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_URLS=https://+:443
     ports:
-      - "5001:80"
       - "5002:443"
+  postsapigateway:
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - IdentityUrl=http://postsmicroservice
+    ports:
+     - "5200:80"
+    volumes:
+     - /back_end/APIGateway/Configurations/configuration

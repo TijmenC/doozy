@@ -3,8 +3,8 @@
     "DownstreamScheme": "http",
     "DownstreamHostAndPorts": [
       {
-        "Host": "postsmicroservice",
-        "Port": 80
+        "Host": "localhost",
+        "Port": "postsmicroservice"
       }
     ],
     "UpstreamPathTemplate": "/post",
