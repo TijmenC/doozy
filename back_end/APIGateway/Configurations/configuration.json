@@ -1,5 +1,4 @@
 {
-  {
     "DownstreamPathTemplate": "/api/post",
     "DownstreamScheme": "http",
     "DownstreamHostAndPorts": [
@@ -14,5 +13,4 @@
       "AuthenticationProviderKey": "IdentityApiKey",
       "AllowedScopes": []
     }
-  }
 }

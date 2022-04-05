@@ -23,7 +23,7 @@ namespace OcelotAPIGateway
                 {
                     webBuilder.UseStartup<Startup>();
                     webBuilder.ConfigureAppConfiguration(
-                          ic => ic.AddJsonFile(Path.Combine("configuration",
+                          ic => ic.AddJsonFile(Path.Combine("Configurations",
                                                             "configuration.json")));
                 });
     }
