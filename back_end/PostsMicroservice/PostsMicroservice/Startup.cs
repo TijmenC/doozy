@@ -29,7 +29,7 @@ namespace PostsMicroservice
                 x.AddConsumer<Consumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
+                    cfg.Host(new Uri("rabbitmq://localhost:15672"), h =>
                     {
                         h.Username("guest");
                         h.Password("guest");

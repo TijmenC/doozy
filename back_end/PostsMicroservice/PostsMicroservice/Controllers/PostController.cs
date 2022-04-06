@@ -17,16 +17,11 @@ namespace PostsMicroservice.Controllers
         private readonly PostContext _context;
 
         private readonly IBus _bus;
-        public PostController(IBus bus)
+        public PostController(IBus bus, PostContext context)
         {
             _bus = bus;
-        }
-/*
-        public PostController(PostContext context)
-        {
             _context = context;
         }
-*/
 
         // GET: api/Post/5
         [HttpGet("{id}")]
@@ -47,7 +42,7 @@ namespace PostsMicroservice.Controllers
         {
             if (ticket != null)
             {
-                Uri uri = new Uri("rabbitmq://localhost/postsQueue");
+                Uri uri = new Uri("rabbitmq://localhost:15672/postsQueue");
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(ticket);
                 return Ok();
