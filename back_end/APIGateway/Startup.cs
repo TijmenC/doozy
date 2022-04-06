@@ -37,8 +37,6 @@ namespace APIGateway
 
             app.UseRouting();
 
-            app.UseHttpsRedirection();
-
             app.UseCors("AllowSpecificOrigin");
 
             app.UseEndpoints(endpoints =>

@@ -1,16 +1,19 @@
 {
-  "Routes": [
+  "ReRoutes": [
     {
       "DownstreamPathTemplate": "/api/post/5",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "5002"
+          "Host": "postapi",
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/post",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "Get" ]
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:6001"
+  }
 }
