@@ -10,8 +10,8 @@ services:
   postsapigateway:
     environment:
      - ASPNETCORE_ENVIRONMENT=Development
-     - ASPNETCORE_URLS=https://+:443
+     - ASPNETCORE_URLS=https://+:80
     ports:
-     - "5200:443"
+     - "5200:80"
     volumes:
      - /back_end/APIGateway/Configurations/configuration
