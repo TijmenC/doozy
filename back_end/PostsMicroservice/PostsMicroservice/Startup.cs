@@ -7,6 +7,7 @@ using PostsMicroservice.Models;
 using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using System;
+using PostsMicroservice.Consumers;
 
 namespace PostsMicroservice
 {
@@ -25,18 +26,26 @@ namespace PostsMicroservice
 
             services.AddMassTransit(x =>
             {
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(config =>
+                x.AddConsumer<Consumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    config.Host(new Uri("rabbitmq://localhost"), h =>
+                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
                     {
                         h.Username("guest");
                         h.Password("guest");
                     });
+                    cfg.ReceiveEndpoint("postsQueue", ep =>
+                    {
+                        ep.PrefetchCount = 16;
+                        ep.UseMessageRetry(r => r.Interval(2, 100));
+                        ep.ConfigureConsumer<Consumer>(provider);
+                    });
                 }));
             });
+            services.AddControllers();
 
-            // services.AddDbContext<PostContext>(opt =>
-            //  opt.UseInMemoryDatabase("PostMicroserviceDB"));
+             services.AddDbContext<PostContext>(opt =>
+             opt.UseInMemoryDatabase("PostMicroserviceDB"));
 
             services.AddControllers();
             services.AddCors();
