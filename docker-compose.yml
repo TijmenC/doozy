@@ -1,15 +1,20 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  postsmicroservice:
-    image: ${DOCKER_REGISTRY-}postsmicroservice:${TAG:-latest}
-    build:
-      context: .
-      dockerfile: back_end/PostsMicroservice/PostsMicroservice/Dockerfile
-    depends_on:
-      - sqldata
-  postsapigateway:
-    image: ${DOCKER_REGISTRY-}apigateway:${TAG:-latest}
+  apigateway:
+    image: apigateway
     build:
       context: .
       dockerfile: back_end/APIGateway/Dockerfile
+    ports:
+      - "6001:80"
+      - "6002:443"
+
+  postmicroservice:
+    image: postmicroservice
+    build:
+      context: .
+      dockerfile: back_end/PostsMicroservice/PostsMicroservice/Dockerfile
+    container_name: postapi
+    ports:
+      - "5500:80"
