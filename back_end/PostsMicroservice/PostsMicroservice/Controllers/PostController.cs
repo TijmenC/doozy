@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MassTransit;
+using Microsoft.AspNetCore.Mvc;
 using PostsMicroservice.DTO;
 using PostsMicroservice.Models;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +16,17 @@ namespace PostsMicroservice.Controllers
     {
         private readonly PostContext _context;
 
+        private readonly IBus _bus;
+        public PostController(IBus bus)
+        {
+            _bus = bus;
+        }
+/*
         public PostController(PostContext context)
         {
             _context = context;
         }
+*/
 
         // GET: api/Post/5
         [HttpGet("{id}")]
@@ -31,6 +40,19 @@ namespace PostsMicroservice.Controllers
             }
 
             return PostToDTO(post);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateTicket(PostShared ticket)
+        {
+            if (ticket != null)
+            {
+                Uri uri = new Uri("rabbitmq://localhost/postsQueue");
+                var endPoint = await _bus.GetSendEndpoint(uri);
+                await endPoint.Send(ticket);
+                return Ok();
+            }
+            return BadRequest();
         }
 
         private static PostDTO PostToDTO(Post todoItem) =>
