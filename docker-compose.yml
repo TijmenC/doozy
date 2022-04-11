@@ -18,6 +18,8 @@ services:
     container_name: postapi
     ports:
       - "5500:80"
+    networks:
+        - rabbitmq_go_net
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'

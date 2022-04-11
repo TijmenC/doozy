@@ -29,11 +29,7 @@ namespace PostsMicroservice
                 x.AddConsumer<Consumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host(new Uri("rabbitmq://localhost"), h =>
-                    {
-                        h.Username("guest");
-                        h.Password("guest");
-                    });
+                    cfg.Host(new Uri("amqp://guest:guest@rabbitmq:5672"));
                     cfg.ReceiveEndpoint("postsQueue", ep =>
                     {
                         ep.PrefetchCount = 16;

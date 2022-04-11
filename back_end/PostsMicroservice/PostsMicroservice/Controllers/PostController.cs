@@ -42,7 +42,7 @@ namespace PostsMicroservice.Controllers
         {
             if (ticket != null)
             {
-                Uri uri = new Uri("rabbitmq://localhost/postsQueue2");
+                Uri uri = new Uri("amqp://guest:guest@rabbitmq:5672/postQueue");
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(ticket);
                 return Ok();
