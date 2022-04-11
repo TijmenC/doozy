@@ -9,6 +9,8 @@ services:
     ports:
       - "6001:80"
       - "6002:443"
+    networks:
+        - rabbitmq_go_net
 
   postmicroservice:
     image: postmicroservice

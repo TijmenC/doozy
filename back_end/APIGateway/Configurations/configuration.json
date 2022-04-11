@@ -13,7 +13,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/post/{everything}",
+      "DownstreamPathTemplate": "/api/post",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,7 +21,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/post/{everything}",
+      "UpstreamPathTemplate": "/post",
       "UpstreamHttpMethod": [ "Post" ]
     }
   ],
