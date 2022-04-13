@@ -40,8 +40,12 @@ namespace PostsMicroservice
             });
             services.AddControllers();
 
+            /*
              services.AddDbContext<PostContext>(opt =>
              opt.UseInMemoryDatabase("PostMicroserviceDB"));
+            */
+
+            services.AddDbContext<PostContext>(o => o.UseMySQL(Configuration["mysqlconnection:connectionString"]));
 
             services.AddControllers();
             services.AddCors();
