@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using System;
 using PostsMicroservice.Consumers;
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace PostsMicroservice
 {
@@ -45,7 +46,15 @@ namespace PostsMicroservice
              opt.UseInMemoryDatabase("PostMicroserviceDB"));
             */
 
-            services.AddDbContext<PostContext>(o => o.UseMySQL(Configuration["mysqlconnection:connectionString"]));
+           var connectionString = Configuration["mysqlconnection:connectionString"];
+
+            services.AddEntityFrameworkMySQL()
+                .AddDbContext<DBContext>(options =>
+                {
+                    options.UseMySQL(Configuration["mysqlconnection:connectionString"]);
+                });
+
+          /*  services.AddDbContext<PostContext>(o => o.UseMySQL(Configuration["mysqlconnection:connectionString"])); */
 
             services.AddControllers();
             services.AddCors();

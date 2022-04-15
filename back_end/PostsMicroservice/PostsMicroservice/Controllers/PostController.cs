@@ -6,6 +6,7 @@ using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PostsMicroservice.Controllers
@@ -17,10 +18,12 @@ namespace PostsMicroservice.Controllers
         private readonly PostContext _context;
 
         private readonly IBus _bus;
-        public PostController(IBus bus, PostContext context)
+
+        private readonly DBContext _DBContext;
+        public PostController(IBus bus, DBContext dbcontext)
         {
             _bus = bus;
-            _context = context;
+            _DBContext = dbcontext;
         }
 
         // GET: api/Post/5
@@ -36,7 +39,7 @@ namespace PostsMicroservice.Controllers
 
             return PostToDTO(post);
         }
-
+        /*
         [HttpPost]
         public async Task<IActionResult> CreateTicket(PostShared ticket)
         {
@@ -48,6 +51,21 @@ namespace PostsMicroservice.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+        */
+        [HttpPost("InsertUser")]
+        public async Task<HttpStatusCode> InsertUser(PostDTO Post)
+        {
+            var entity = new Post()
+            {
+                Title = Post.Title,
+                Description = Post.Description
+            };
+
+            _DBContext.Posts.Add(entity);
+            await _DBContext.SaveChangesAsync();
+
+            return HttpStatusCode.Created;
         }
 
         private static PostDTO PostToDTO(Post todoItem) =>
