@@ -18,7 +18,7 @@ namespace PostsMicroservice
         {
         }
 
-        public virtual DbSet<Post> Posts { get; set; }
+        public virtual DbSet<Post> Post { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,7 +29,7 @@ namespace PostsMicroservice
         {
             modelBuilder.Entity<Post>(entity =>
             {
-                entity.ToTable("post");
+                entity.ToTable("Post");
 
                 entity.Property(e => e.Id).HasColumnType("int(11)");
 

@@ -19,11 +19,11 @@ namespace PostsMicroservice.Controllers
 
         private readonly IBus _bus;
 
-        private readonly DBContext _DBContext;
-        public PostController(IBus bus, DBContext dbcontext)
+        private readonly DBContext DBContext;
+        public PostController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
-            _DBContext = dbcontext;
+            this.DBContext = DBContext;
         }
 
         // GET: api/Post/5
@@ -58,12 +58,13 @@ namespace PostsMicroservice.Controllers
         {
             var entity = new Post()
             {
+                Id = Post.Id,
                 Title = Post.Title,
                 Description = Post.Description
             };
 
-            _DBContext.Posts.Add(entity);
-            await _DBContext.SaveChangesAsync();
+            DBContext.Post.Add(entity);
+            await DBContext.SaveChangesAsync();
 
             return HttpStatusCode.Created;
         }
