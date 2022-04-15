@@ -11,22 +11,23 @@ services:
       - "6002:443"
     networks:
         - rabbitmq_go_net
+        - db_server
   db:
-    #Pull the latest mysql image
-    image: mysql:8.0.22
-    #Map port 3306 on the mysql container to port 3306 in the host
-    ports:
-      - "3306:3306"
-    #Specify where the persisted Data should be stored
-    volumes:
-       - dbdata:/var/lib/mysql
-    restart: always
-    #Specify Environment Variables for mysql
-    environment: 
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
-      MYSQL_DATABASE: accountowner
-      MYSQL_USER: dbuser
-      MYSQL_PASSWORD: dbuserpassword
+   container_name: 'db'
+   hostname: 'db'
+   image: 'mysql'
+   restart: always
+   environment: 
+     MYSQL_DATABASE: 'mydbname'
+     MYSQL_ROOT_PASSWORD: 'mydbpd'
+     MYSQL_USER: 'mydbuser'
+     MYSQL_PASSWORD: 'mydbpd'
+   ports: 
+     - "8885:3306"
+   volumes:
+     - dbdata:/var/lib/mysq
+   networks:
+     - db_server
 
   postmicroservice:
     image: postmicroservice
@@ -38,6 +39,9 @@ services:
       - "5500:80"
     networks:
         - rabbitmq_go_net
+        - db_server
+    depends_on: 
+            - db
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -51,6 +55,8 @@ services:
         - rabbitmq_go_net
 networks:
   rabbitmq_go_net:
+    driver: bridge
+  db_server:
     driver: bridge
 volumes:
     dbdata:
