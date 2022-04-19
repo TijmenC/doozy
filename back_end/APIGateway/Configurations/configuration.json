@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/post/{id}",
+      "DownstreamPathTemplate": "/api/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,20 +9,8 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/post/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/post",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "postapi",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/post",
-      "UpstreamHttpMethod": [ "Post" ]
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ],
   "GlobalConfiguration": {

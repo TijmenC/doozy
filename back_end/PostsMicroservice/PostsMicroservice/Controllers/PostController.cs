@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using PostsMicroservice.DTO;
 using PostsMicroservice.Models;
-using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace PostsMicroservice.Controllers
@@ -14,20 +14,20 @@ namespace PostsMicroservice.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostContext _context;
 
         private readonly IBus _bus;
-        public PostController(IBus bus, PostContext context)
+
+        private readonly DBContext _DBContext;
+        public PostController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
-            _context = context;
+            _DBContext = DBContext;
         }
 
-        // GET: api/Post/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PostDTO>> GetPost(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _DBContext.Post.FindAsync(id);
 
             if (post == null)
             {
@@ -36,9 +36,8 @@ namespace PostsMicroservice.Controllers
 
             return PostToDTO(post);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> CreateTicket(PostShared ticket)
+        [HttpPost("Post")]
+        public async Task<IActionResult> CreateTicket(Post ticket)
         {
             if (ticket != null)
             {
@@ -48,6 +47,21 @@ namespace PostsMicroservice.Controllers
                 return Ok();
             }
             return BadRequest();
+        }
+        [HttpPost("SavePost")]
+        public async Task<HttpStatusCode> InsertPost(PostDTO Post)
+        {
+            var entity = new Post()
+            {
+                Id = Post.Id,
+                Title = Post.Title,
+                Description = Post.Description
+            };
+
+            _DBContext.Post.Add(entity);
+            await _DBContext.SaveChangesAsync();
+
+            return HttpStatusCode.Created;
         }
 
         private static PostDTO PostToDTO(Post todoItem) =>

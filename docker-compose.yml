@@ -11,6 +11,26 @@ services:
       - "6002:443"
     networks:
         - rabbitmq_go_net
+        - db_server
+    depends_on: 
+            - db
+  db:
+   container_name: 'db'
+   hostname: 'db'
+   image: mysql:8.0.19
+   command: --default-authentication-plugin=mysql_native_password
+   restart: always
+   environment: 
+     MYSQL_DATABASE: mydbname
+     MYSQL_ROOT_PASSWORD: mydbpd
+     MYSQL_USER: mydbuser
+     MYSQL_PASSWORD: mydbpd
+   ports: 
+     - "8885:3306"
+   volumes:
+     - dbdata:/var/lib/mysq
+   networks:
+     - db_server
 
   postmicroservice:
     image: postmicroservice
@@ -22,6 +42,9 @@ services:
       - "5500:80"
     networks:
         - rabbitmq_go_net
+        - db_server
+    depends_on: 
+            - db
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -36,3 +59,7 @@ services:
 networks:
   rabbitmq_go_net:
     driver: bridge
+  db_server:
+    driver: bridge
+volumes:
+    dbdata:
