@@ -24,7 +24,6 @@ namespace PostsMicroservice.Controllers
             _DBContext = DBContext;
         }
 
-        // GET: api/Post/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PostDTO>> GetPost(int id)
         {
@@ -37,9 +36,8 @@ namespace PostsMicroservice.Controllers
 
             return PostToDTO(post);
         }
-        /*
-        [HttpPost]
-        public async Task<IActionResult> CreateTicket(PostShared ticket)
+        [HttpPost("Post")]
+        public async Task<IActionResult> CreateTicket(Post ticket)
         {
             if (ticket != null)
             {
@@ -50,9 +48,8 @@ namespace PostsMicroservice.Controllers
             }
             return BadRequest();
         }
-        */
-        [HttpPost("InsertUser")]
-        public async Task<HttpStatusCode> InsertUser(PostDTO Post)
+        [HttpPost("SavePost")]
+        public async Task<HttpStatusCode> InsertPost(PostDTO Post)
         {
             var entity = new Post()
             {

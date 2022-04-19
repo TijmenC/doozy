@@ -12,6 +12,8 @@ services:
     networks:
         - rabbitmq_go_net
         - db_server
+    depends_on: 
+            - db
   db:
    container_name: 'db'
    hostname: 'db'

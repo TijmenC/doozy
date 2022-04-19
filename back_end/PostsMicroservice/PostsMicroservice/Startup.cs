@@ -41,38 +41,20 @@ namespace PostsMicroservice
             });
             services.AddControllers();
 
-            /*
-             services.AddDbContext<PostContext>(opt =>
-             opt.UseInMemoryDatabase("PostMicroserviceDB"));
-            */
-
            var connectionString = Configuration["mysqlconnection:connectionString"];
 
-          //  services.AddEntityFrameworkMySQL()
                 services.AddDbContext<DBContext>(options =>
                 {
                     options.UseMySQL(Configuration["mysqlconnection:connectionString"]);
-                  //  options.use
                 });
-
-          /*  services.AddDbContext<PostContext>(o => o.UseMySQL(Configuration["mysqlconnection:connectionString"])); */
 
             services.AddControllers();
             services.AddCors();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
-            /*
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context2 = serviceScope.ServiceProvider.GetRequiredService<DBContext>();
-                context2.Database.EnsureCreated();
-            }
-            */
-
             context.Database.Migrate();
             DbInitializer.Initialize(context);
 
@@ -82,7 +64,6 @@ namespace PostsMicroservice
             }
 
             //DISABLE WHILE IN PRODUCTION!
-
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
