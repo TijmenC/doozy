@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using System;
 using PostsMicroservice.Consumers;
+using MySql.EntityFrameworkCore.Extensions;
 
 namespace PostsMicroservice
 {
@@ -40,24 +41,29 @@ namespace PostsMicroservice
             });
             services.AddControllers();
 
-             services.AddDbContext<PostContext>(opt =>
-             opt.UseInMemoryDatabase("PostMicroserviceDB"));
+           var connectionString = Configuration["mysqlconnection:connectionString"];
+
+                services.AddDbContext<DBContext>(options =>
+                {
+                    options.UseMySQL(Configuration["mysqlconnection:connectionString"]);
+                });
 
             services.AddControllers();
             services.AddCors();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
+            context.Database.Migrate();
+            DbInitializer.Initialize(context);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             //DISABLE WHILE IN PRODUCTION!
-
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
