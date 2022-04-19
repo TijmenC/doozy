@@ -20,31 +20,16 @@ namespace PostsMicroservice
 
         public virtual DbSet<Post> Post { get; set; }
 
+        /*
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-
+            optionsBuilder.UseMySQL("server=db;userid=mydbuser;pwd=mydbpd;port=3306;database=mydbname");
         }
-
+        */
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.ToTable("Post");
-
-                entity.Property(e => e.Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.Title)
-                    .IsRequired()
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
-            });
-
-            OnModelCreatingPartial(modelBuilder);
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Post>().ToTable("Post");
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

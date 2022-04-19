@@ -48,10 +48,11 @@ namespace PostsMicroservice
 
            var connectionString = Configuration["mysqlconnection:connectionString"];
 
-            services.AddEntityFrameworkMySQL()
-                .AddDbContext<DBContext>(options =>
+          //  services.AddEntityFrameworkMySQL()
+                services.AddDbContext<DBContext>(options =>
                 {
                     options.UseMySQL(Configuration["mysqlconnection:connectionString"]);
+                  //  options.use
                 });
 
           /*  services.AddDbContext<PostContext>(o => o.UseMySQL(Configuration["mysqlconnection:connectionString"])); */
@@ -62,8 +63,19 @@ namespace PostsMicroservice
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
+            /*
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context2 = serviceScope.ServiceProvider.GetRequiredService<DBContext>();
+                context2.Database.EnsureCreated();
+            }
+            */
+
+            context.Database.Migrate();
+            DbInitializer.Initialize(context);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PostsMicroservice.DTO;
 using PostsMicroservice.Models;
-using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,22 +14,21 @@ namespace PostsMicroservice.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostContext _context;
 
         private readonly IBus _bus;
 
-        private readonly DBContext DBContext;
+        private readonly DBContext _DBContext;
         public PostController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
-            this.DBContext = DBContext;
+            _DBContext = DBContext;
         }
 
         // GET: api/Post/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PostDTO>> GetPost(int id)
         {
-            var post = await _context.Posts.FindAsync(id);
+            var post = await _DBContext.Post.FindAsync(id);
 
             if (post == null)
             {
@@ -63,8 +61,8 @@ namespace PostsMicroservice.Controllers
                 Description = Post.Description
             };
 
-            DBContext.Post.Add(entity);
-            await DBContext.SaveChangesAsync();
+            _DBContext.Post.Add(entity);
+            await _DBContext.SaveChangesAsync();
 
             return HttpStatusCode.Created;
         }
