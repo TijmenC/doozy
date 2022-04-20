@@ -21,13 +21,11 @@ namespace PostsMicroservice
             {
                 new Post
                 {
-                    Id = 0,
                     Title = "Title",
                     Description = "Description"
                 },
                  new Post
                 {
-                    Id = 1,
                     Title = "Title2",
                     Description = "Description2"
                 },
