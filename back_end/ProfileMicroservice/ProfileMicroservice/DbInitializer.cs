@@ -30,18 +30,18 @@ namespace ProfileMicroservice
                 },
                  new User
                 {
-                    Id = 0,
+                    Id = 1,
                     DateOfBirth =  new DateTime(2000, 2, 29),
-                    DisplayName = "Eric",
-                    UserName = "CoolEric",
-                    Email = "EricIsCool@gmail.com"
+                    DisplayName = "Patrick",
+                    UserName = "CoolPatrick",
+                    Email = "PatrickIsCool@gmail.com"
 
                 },
             };
 
             foreach (User subject in subjects)
             {
-                context.Post.Add(subject);
+                context.Users.Add(subject);
             }
             context.SaveChanges();
         }
