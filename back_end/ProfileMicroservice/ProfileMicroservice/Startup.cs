@@ -41,8 +41,6 @@ namespace ProfileMicroservice
             });
             services.AddControllers();
 
-           var connectionString = Configuration["mysqlconnection:connectionString"];
-
                 services.AddDbContext<DBContext>(options =>
                 {
                     options.UseMySQL(Configuration["mysqlconnection:connectionString"]);

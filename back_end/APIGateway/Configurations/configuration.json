@@ -9,7 +9,19 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamPathTemplate": "/post/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileapi",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/profile/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ],

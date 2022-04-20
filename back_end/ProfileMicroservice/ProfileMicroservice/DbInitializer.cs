@@ -21,7 +21,6 @@ namespace ProfileMicroservice
             {
                 new User
                 {
-                    Id = 0,
                     DateOfBirth =  new DateTime(2000, 2, 29),
                     DisplayName = "Eric",
                     UserName = "CoolEric",
@@ -30,7 +29,6 @@ namespace ProfileMicroservice
                 },
                  new User
                 {
-                    Id = 1,
                     DateOfBirth =  new DateTime(2000, 2, 29),
                     DisplayName = "Patrick",
                     UserName = "CoolPatrick",

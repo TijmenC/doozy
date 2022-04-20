@@ -12,13 +12,13 @@ namespace ProfileMicroservice.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostController : ControllerBase
+    public class ProfileController : ControllerBase
     {
 
         private readonly IBus _bus;
 
         private readonly DBContext _DBContext;
-        public PostController(IBus bus, DBContext DBContext)
+        public ProfileController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
             _DBContext = DBContext;
@@ -36,19 +36,19 @@ namespace ProfileMicroservice.Controllers
 
             return post;
         }
-        [HttpPost("Post")]
+        [HttpPost("Profile")]
         public async Task<IActionResult> CreateTicket(User user)
         {
             if (user != null)
             {
-                Uri uri = new Uri("amqp://guest:guest@rabbitmq:5672/postQueue");
+                Uri uri = new Uri("amqp://guest:guest@rabbitmq:5672/profileQueue");
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(user);
                 return Ok();
             }
             return BadRequest();
         }
-        [HttpPost("SavePost")]
+        [HttpPost("SaveProfile")]
         public async Task<HttpStatusCode> InsertUser(User Post)
         {
             var entity = new User()
