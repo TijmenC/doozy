@@ -56,6 +56,7 @@ namespace PostsMicroservice
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
             context.Database.Migrate();
+
             DbInitializer.Initialize(context);
 
             if (env.IsDevelopment())
