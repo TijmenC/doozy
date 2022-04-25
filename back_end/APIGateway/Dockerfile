@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:3.1 AS build
 WORKDIR /src
-COPY ["back_end/APIGateway/APIGateway.csproj", "back_end/APIGateway/"]
-RUN dotnet restore "back_end/APIGateway/APIGateway.csproj"
+COPY ["APIGateway.csproj", "back_end/APIGateway/"]
+RUN dotnet restore "APIGateway/APIGateway.csproj"
 COPY . .
-WORKDIR "/src/back_end/APIGateway"
+WORKDIR "APIGateway"
 RUN dotnet build "APIGateway.csproj" -c Release -o /app/build
 
 FROM build AS publish
