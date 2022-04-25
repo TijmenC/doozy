@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: tijmencdoozy 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tijmencdoozy
+  template:
+    metadata:
+      labels:
+        app: tijmencdoozy 
+    spec:
+      containers:
+        - name: tijmencdoozy 
+          image: doozyregistery.azurecr.io/tijmencdoozy
+          ports:
+          - containerPort: 80
