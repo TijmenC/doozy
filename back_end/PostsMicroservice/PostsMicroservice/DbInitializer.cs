@@ -21,13 +21,20 @@ namespace PostsMicroservice
             {
                 new Post
                 {
-                    Title = "Title",
-                    Description = "Description"
+                    UserId = 0,
+                    Title = "Drank so much!",
+                    Description = "Doozy",
+                    AmountDrank = 8,
+                    DrinkType = DrinkType.Beer
+
                 },
                  new Post
                 {
-                    Title = "Title2",
-                    Description = "Description2"
+                    UserId = 0,
+                    Title = "Drank so much again!",
+                    Description = "Doozy",
+                    AmountDrank = 11,
+                    DrinkType = DrinkType.Beer
                 },
             };
 

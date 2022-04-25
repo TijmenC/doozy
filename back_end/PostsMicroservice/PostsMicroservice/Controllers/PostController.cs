@@ -1,6 +1,5 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
-using PostsMicroservice.DTO;
 using PostsMicroservice.Models;
 using System;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace PostsMicroservice.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostDTO>> GetPost(int id)
+        public async Task<ActionResult<Post>> GetPost(int id)
         {
             var post = await _DBContext.Post.FindAsync(id);
 
@@ -34,7 +33,7 @@ namespace PostsMicroservice.Controllers
                 return NotFound();
             }
 
-            return PostToDTO(post);
+            return post;
         }
         [HttpPost("Post")]
         public async Task<IActionResult> CreateTicket(Post ticket)
@@ -49,13 +48,16 @@ namespace PostsMicroservice.Controllers
             return BadRequest();
         }
         [HttpPost("SavePost")]
-        public async Task<HttpStatusCode> InsertPost(PostDTO Post)
+        public async Task<HttpStatusCode> InsertPost(Post Post)
         {
             var entity = new Post()
             {
                 Id = Post.Id,
+                UserId = Post.Id,
                 Title = Post.Title,
-                Description = Post.Description
+                Description = Post.Description,
+                AmountDrank = Post.AmountDrank,
+                DrinkType = Post.DrinkType
             };
 
             _DBContext.Post.Add(entity);
@@ -63,13 +65,5 @@ namespace PostsMicroservice.Controllers
 
             return HttpStatusCode.Created;
         }
-
-        private static PostDTO PostToDTO(Post todoItem) =>
-      new PostDTO
-      {
-          Id = todoItem.Id,
-          Title = todoItem.Title,
-          Description = todoItem.Description
-      };
     }
   }
