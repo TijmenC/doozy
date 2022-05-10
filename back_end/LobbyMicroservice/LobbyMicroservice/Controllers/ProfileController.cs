@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LobbyMicroservice.Controllers
 {
@@ -79,6 +80,53 @@ namespace LobbyMicroservice.Controllers
             await _DBContext.SaveChangesAsync();
 
             return HttpStatusCode.Created;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateQuestion(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            var question = await _DBContext.Users.FindAsync(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _DBContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) when (!UserExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteUser(int id)
+        {
+            var user = await _DBContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _DBContext.Users.Remove(user);
+            await _DBContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool UserExists(long id)
+        {
+            return _DBContext.Users.Any(e => e.Id == id);
         }
     }
 }

@@ -43,9 +43,8 @@ namespace LobbyMicroserviceTests
 
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
         }
-        /*
         [Fact]
-        public async Task Delete_Succeed_Question()
+        public async Task Delete_Succeed_User()
         {
             var response = await _client.DeleteAsync("api/profile/2");
 
@@ -71,20 +70,16 @@ namespace LobbyMicroserviceTests
         [Fact]
         public async Task Put_Succeed_Question()
         {
-            var response = await _client.PutAsync("api/Question/3", new StringContent(JsonConvert.SerializeObject(new User()
+            var response = await _client.PutAsync("api/Profile/3", new StringContent(JsonConvert.SerializeObject(new User()
             {
                 Id = 3,
-                Title = "title changed",
-                Description = "description changed",
-                Tag = "Relationship changed",
-                CommentsEnabled = false,
-                Image = "imagechanged.png",
-                DeletionTime = new DateTime(2020, 12, 22)
+                UserName = "Peter2",
+                DisplayName = "Peter24Cool",
+                Email = "Peter2@gmail.com",
+                DateOfBirth = new DateTime(2001, 12, 25)
             }), Encoding.UTF8, "application/json"));
 
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
-        */
-
     }
 }
