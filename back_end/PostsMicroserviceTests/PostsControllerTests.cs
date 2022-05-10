@@ -55,7 +55,7 @@ namespace PostsMicroserviceTests
             [Fact]
             public async Task Post_Succeed_Post()
             {
-                var response = await _client.PostAsync("api/post", new StringContent(JsonConvert.SerializeObject(new Post()
+                var response = await _client.PostAsync("api/post/SavePost", new StringContent(JsonConvert.SerializeObject(new Post()
                 {
                     UserId = 0,
                     Title = "Drank so much!",
@@ -66,12 +66,12 @@ namespace PostsMicroserviceTests
 
                 response.EnsureSuccessStatusCode();
 
-                response.StatusCode.Should().Be(HttpStatusCode.Created);
+                response.StatusCode.Should().Be(HttpStatusCode.OK);
             }
             [Fact]
             public async Task Put_Succeed_Post()
             {
-                var response = await _client.PutAsync("api/Profile/3", new StringContent(JsonConvert.SerializeObject(new Post()
+                var response = await _client.PutAsync("api/post/3", new StringContent(JsonConvert.SerializeObject(new Post()
                 {
                     Id = 3,
                     UserId = 0,

@@ -12,12 +12,12 @@ using ProfileMicroservice.Models;
 
 namespace ProfileMicroserviceTests
 {
-    public class LobbyControllerTests : IClassFixture<LobbyMicroserviceFactory<Startup>>
+    public class ProfileControllerTests : IClassFixture<ProfileMicroserviceFactory<Startup>>
     {
         private readonly HttpClient _client;
-        private readonly LobbyMicroserviceFactory<Startup> _factory;
-        public LobbyControllerTests(
-        LobbyMicroserviceFactory<Startup> factory)
+        private readonly ProfileMicroserviceFactory<Startup> _factory;
+        public ProfileControllerTests(
+        ProfileMicroserviceFactory<Startup> factory)
         {
             _factory = factory;
             _client = factory.CreateClient();
@@ -54,7 +54,7 @@ namespace ProfileMicroserviceTests
         [Fact]
         public async Task Post_Succeed_User()
         {
-            var response = await _client.PostAsync("api/saveprofile", new StringContent(JsonConvert.SerializeObject(new User()
+            var response = await _client.PostAsync("api/profile/SaveProfile", new StringContent(JsonConvert.SerializeObject(new User()
             {
                 UserName = "Jewel",
                 DisplayName = "Jewel4Kool",
@@ -64,7 +64,7 @@ namespace ProfileMicroserviceTests
 
             response.EnsureSuccessStatusCode();
 
-            response.StatusCode.Should().Be(HttpStatusCode.Created);
+            response.StatusCode.Should().Be(HttpStatusCode.OK);
         }
         [Fact]
         public async Task Put_Succeed_User()

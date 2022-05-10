@@ -11,7 +11,7 @@ using ProfileMicroservice;
 
 namespace ProfileMicroserviceTests
 {
-    public class LobbyMicroserviceFactory<TStartup>
+    public class ProfileMicroserviceFactory<TStartup>
 : WebApplicationFactory<TStartup> where TStartup : class
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -36,7 +36,7 @@ namespace ProfileMicroserviceTests
                     var scopedServices = scope.ServiceProvider;
                     var db = scopedServices.GetRequiredService<DBContext>();
                     var logger = scopedServices
-                        .GetRequiredService<ILogger<LobbyMicroserviceFactory<TStartup>>>();
+                        .GetRequiredService<ILogger<ProfileMicroserviceFactory<TStartup>>>();
 
                     db.Database.EnsureCreated();
 
