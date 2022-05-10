@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LobbyMicroservice", "back_e
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobbyMicroserviceTests", "back_end\LobbyMicroserviceTests\LobbyMicroserviceTests.csproj", "{BBA95EE7-4751-4AD2-8C66-56265F72222E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostsMicroserviceTests", "back_end\PostsMicroserviceTests\PostsMicroserviceTests.csproj", "{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{BBA95EE7-4751-4AD2-8C66-56265F72222E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBA95EE7-4751-4AD2-8C66-56265F72222E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBA95EE7-4751-4AD2-8C66-56265F72222E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PostsMicroservice.Models;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,23 @@ namespace PostsMicroservice.Controllers
 
             return post;
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        {
+            var posts = await _DBContext.Post.ToListAsync();
+            List<Post> postList = new List<Post>();
+
+            if (posts.Count == 0)
+            {
+                return NotFound();
+            }
+
+            postList.AddRange(posts);
+
+            return postList;
+        }
+
         [HttpPost("Post")]
         public async Task<IActionResult> CreateTicket(Post ticket)
         {
@@ -47,6 +65,7 @@ namespace PostsMicroservice.Controllers
             }
             return BadRequest();
         }
+
         [HttpPost("SavePost")]
         public async Task<HttpStatusCode> InsertPost(Post Post)
         {
@@ -64,6 +83,53 @@ namespace PostsMicroservice.Controllers
             await _DBContext.SaveChangesAsync();
 
             return HttpStatusCode.Created;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePost(int id, Post insertedPost)
+        {
+            if (id != insertedPost.Id)
+            {
+                return BadRequest();
+            }
+
+            var post = await _DBContext.Post.FindAsync(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _DBContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) when (!PostExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Post>> DeletePost(int id)
+        {
+            var post = await _DBContext.Post.FindAsync(id);
+
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            _DBContext.Post.Remove(post);
+            await _DBContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool PostExists(long id)
+        {
+            return _DBContext.Post.Any(e => e.Id == id);
         }
     }
   }

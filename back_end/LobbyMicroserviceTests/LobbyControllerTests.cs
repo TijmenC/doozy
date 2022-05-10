@@ -52,11 +52,10 @@ namespace LobbyMicroserviceTests
         }
 
         [Fact]
-        public async Task Post_Succeed_Question()
+        public async Task Post_Succeed_User()
         {
-            var response = await _client.PostAsync("api/profile", new StringContent(JsonConvert.SerializeObject(new User()
+            var response = await _client.PostAsync("api/saveprofile", new StringContent(JsonConvert.SerializeObject(new User()
             {
-                Id = 10,
                 UserName = "Jewel",
                 DisplayName = "Jewel4Kool",
                 Email = "Jewel@gmail.com",
@@ -68,7 +67,7 @@ namespace LobbyMicroserviceTests
             response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
         [Fact]
-        public async Task Put_Succeed_Question()
+        public async Task Put_Succeed_User()
         {
             var response = await _client.PutAsync("api/Profile/3", new StringContent(JsonConvert.SerializeObject(new User()
             {
