@@ -24,17 +24,32 @@ namespace LobbyMicroservice.Controllers
             _DBContext = DBContext;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        {
+            var users = await _DBContext.Users.ToListAsync();
+            List<User> userList = new List<User>();
+
+            if (users.Count == 0) {
+                return NotFound();
+            }
+
+            userList.AddRange(users);
+
+            return userList;
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
-            var post = await _DBContext.Users.FindAsync(id);
+            var user = await _DBContext.Users.FindAsync(id);
 
-            if (post == null)
+            if (user == null)
             {
                 return NotFound();
             }
 
-            return post;
+            return user;
         }
         [HttpPost("Profile")]
         public async Task<IActionResult> CreateTicket(User user)

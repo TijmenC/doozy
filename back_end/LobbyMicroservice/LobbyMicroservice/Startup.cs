@@ -53,7 +53,11 @@ namespace LobbyMicroservice
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DBContext context)
         {
-            context.Database.Migrate();
+            if (context.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                context.Database.Migrate();
+            }
+
             DbInitializer.Initialize(context);
 
             if (env.IsDevelopment())
