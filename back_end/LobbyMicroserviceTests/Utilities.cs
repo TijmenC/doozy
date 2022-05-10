@@ -1,10 +1,10 @@
-﻿using LobbyMicroservice;
-using LobbyMicroservice.Models;
+﻿using ProfileMicroservice;
+using ProfileMicroservice.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace LobbyMicroserviceTests
+namespace ProfileMicroserviceTests
 {
     class Utilities
     {

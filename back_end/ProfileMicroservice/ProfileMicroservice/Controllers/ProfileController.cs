@@ -1,5 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ProfileMicroservice.DTO;
 using ProfileMicroservice.Models;
 using System;
@@ -24,17 +25,33 @@ namespace ProfileMicroservice.Controllers
             _DBContext = DBContext;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
-            var post = await _DBContext.Users.FindAsync(id);
+            var users = await _DBContext.Users.ToListAsync();
+            List<User> userList = new List<User>();
 
-            if (post == null)
+            if (users.Count == 0)
             {
                 return NotFound();
             }
 
-            return post;
+            userList.AddRange(users);
+
+            return userList;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<User>> GetUser(int id)
+        {
+            var user = await _DBContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
         [HttpPost("Profile")]
         public async Task<IActionResult> CreateTicket(User user)
@@ -49,21 +66,68 @@ namespace ProfileMicroservice.Controllers
             return BadRequest();
         }
         [HttpPost("SaveProfile")]
-        public async Task<HttpStatusCode> InsertUser(User Post)
+        public async Task<HttpStatusCode> InsertUser(User user)
         {
             var entity = new User()
             {
-                Id = 0,
-                DateOfBirth = new DateTime(2000, 2, 29),
-                DisplayName = "Eric",
-                UserName = "CoolEric",
-                Email = "EricIsCool@gmail.com"
+                Id = user.Id,
+                DateOfBirth = user.DateOfBirth,
+                DisplayName = user.DisplayName,
+                UserName = user.UserName,
+                Email = user.Email
             };
 
             _DBContext.Users.Add(entity);
             await _DBContext.SaveChangesAsync();
 
             return HttpStatusCode.Created;
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateQuestion(int id, User user)
+        {
+            if (id != user.Id)
+            {
+                return BadRequest();
+            }
+
+            var question = await _DBContext.Users.FindAsync(id);
+            if (question == null)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                await _DBContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException) when (!UserExists(id))
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<User>> DeleteUser(int id)
+        {
+            var user = await _DBContext.Users.FindAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _DBContext.Users.Remove(user);
+            await _DBContext.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        private bool UserExists(long id)
+        {
+            return _DBContext.Users.Any(e => e.Id == id);
         }
     }
 }

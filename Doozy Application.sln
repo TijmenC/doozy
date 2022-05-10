@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileMicroservice", "back
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LobbyMicroservice", "back_end\LobbyMicroservice\LobbyMicroservice\LobbyMicroservice.csproj", "{119ED906-7035-484B-B22F-152630925BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LobbyMicroserviceTests", "back_end\LobbyMicroserviceTests\LobbyMicroserviceTests.csproj", "{BBA95EE7-4751-4AD2-8C66-56265F72222E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProfileMicroserviceTests", "back_end\LobbyMicroserviceTests\ProfileMicroserviceTests.csproj", "{BBA95EE7-4751-4AD2-8C66-56265F72222E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostsMicroserviceTests", "back_end\PostsMicroserviceTests\PostsMicroserviceTests.csproj", "{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}"
 EndProject

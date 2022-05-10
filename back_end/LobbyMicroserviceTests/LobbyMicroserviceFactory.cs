@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using LobbyMicroservice;
+using ProfileMicroservice;
 
-namespace LobbyMicroserviceTests
+namespace ProfileMicroserviceTests
 {
     public class LobbyMicroserviceFactory<TStartup>
 : WebApplicationFactory<TStartup> where TStartup : class

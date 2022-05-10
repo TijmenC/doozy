@@ -1,4 +1,4 @@
-using LobbyMicroservice;
+using ProfileMicroservice;
 using System;
 using Xunit;
 using Newtonsoft.Json;
@@ -8,9 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
-using LobbyMicroservice.Models;
+using ProfileMicroservice.Models;
 
-namespace LobbyMicroserviceTests
+namespace ProfileMicroserviceTests
 {
     public class LobbyControllerTests : IClassFixture<LobbyMicroserviceFactory<Startup>>
     {
