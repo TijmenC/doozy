@@ -49,15 +49,15 @@ namespace LobbyMicroservice.Controllers
             return BadRequest();
         }
         [HttpPost("SaveProfile")]
-        public async Task<HttpStatusCode> InsertUser(User Post)
+        public async Task<HttpStatusCode> InsertUser(User user)
         {
             var entity = new User()
             {
-                Id = 0,
-                DateOfBirth = new DateTime(2000, 2, 29),
-                DisplayName = "Eric",
-                UserName = "CoolEric",
-                Email = "EricIsCool@gmail.com"
+                Id = user.Id,
+                DateOfBirth = user.DateOfBirth,
+                DisplayName = user.DisplayName,
+                UserName = user.UserName,
+                Email = user.Email
             };
 
             _DBContext.Users.Add(entity);
