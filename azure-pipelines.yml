@@ -8,9 +8,6 @@ trigger:
 resources:
 - repo: self
 
-trigger:
-- main
-
 variables:
 
   # Container registry service connection established during pipeline creation
