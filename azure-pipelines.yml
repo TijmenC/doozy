@@ -27,11 +27,11 @@ variables:
 
 
 stages:
-- stage: Build.Test
-  displayName: Build.Test
+- stage: BuildTest
+  displayName: BuildTest
   jobs:
   - job: BuildAndTest
-    displayName: Build.Test
+    displayName: BuildTest
     pool:
       vmImage: 'windows-latest'
     steps:
