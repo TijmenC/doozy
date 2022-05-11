@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PostsMicroservice.Models;
+using ProfileMicroservice.Models;
 using Microsoft.EntityFrameworkCore;
 using MassTransit;
 using System;
-using PostsMicroservice.Consumers;
+using ProfileMicroservice.Consumers;
 using MySql.EntityFrameworkCore.Extensions;
 
-namespace PostsMicroservice
+namespace ProfileMicroservice
 {
     public class Startup
     {
@@ -31,7 +31,7 @@ namespace PostsMicroservice
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.Host(new Uri("amqp://guest:guest@rabbitmq:5672"));
-                    cfg.ReceiveEndpoint("postQueue", ep =>
+                    cfg.ReceiveEndpoint("usersQueue", ep =>
                     {
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 100));
@@ -40,8 +40,6 @@ namespace PostsMicroservice
                 }));
             });
             services.AddControllers();
-
-           var connectionString = Configuration["mysqlconnection:connectionString"];
 
                 services.AddDbContext<DBContext>(options =>
                 {

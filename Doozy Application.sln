@@ -9,7 +9,13 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "back_end\APIGateway\APIGateway.csproj", "{75434329-1F0C-4540-8D74-4DE4DB603794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Models", "back_end\Shared.Models\Shared.Models.csproj", "{84753D88-81FE-4515-A02F-7F532C19EF5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Models", "back_end\Shared.Models\Shared.Models.csproj", "{84753D88-81FE-4515-A02F-7F532C19EF5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileMicroservice", "back_end\ProfileMicroservice\ProfileMicroservice\ProfileMicroservice.csproj", "{57AA701A-10AE-4101-AB3C-EED36867FCB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostsMicroserviceTests", "back_end\PostsMicroserviceTests\PostsMicroserviceTests.csproj", "{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileMicroserviceTests", "back_end\ProfileMicroserviceTests\ProfileMicroserviceTests.csproj", "{32D20F5E-1320-4EA3-9333-58182C7641E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{84753D88-81FE-4515-A02F-7F532C19EF5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84753D88-81FE-4515-A02F-7F532C19EF5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84753D88-81FE-4515-A02F-7F532C19EF5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57AA701A-10AE-4101-AB3C-EED36867FCB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57AA701A-10AE-4101-AB3C-EED36867FCB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57AA701A-10AE-4101-AB3C-EED36867FCB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57AA701A-10AE-4101-AB3C-EED36867FCB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C0A3EC-DBAC-45C0-81F4-E4ED90485C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

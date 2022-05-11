@@ -28,7 +28,8 @@ services:
    ports: 
      - "8885:3306"
    volumes:
-     - dbdata:/var/lib/mysq
+     - dbdata:/var/lib/mysql
+     - ./init:/docker-entrypoint-initdb.d
    networks:
      - db_server
 
@@ -40,6 +41,19 @@ services:
     container_name: postapi
     ports:
       - "5500:80"
+    networks:
+        - rabbitmq_go_net
+        - db_server
+    depends_on: 
+            - db
+  profilemicroservice:
+    image: profilemicroservice
+    build:
+      context: .
+      dockerfile: back_end/ProfileMicroservice/ProfileMicroservice/Dockerfile
+    container_name: profileapi
+    ports:
+      - "5501:80"
     networks:
         - rabbitmq_go_net
         - db_server
