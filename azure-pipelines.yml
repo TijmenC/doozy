@@ -30,5 +30,13 @@ steps:
 
 - task: VSTest@2
   inputs:
+    testAssemblyVer2: |
+     **\$(BuildConfiguration)\**\*Tests*.dll
+     !**\$(BuildConfiguration)\**\*Models*.dll
+     !**\*TestAdapter.dll
+     !**\obj\**
+     !**\$(BuildConfiguration)\**\*IntegrationTests*.dll
+    codeCoverageEnabled: true
+    testRunTitle: '$(Build.DefinitionName) | $(Build.Reason) |$(Build.SourceVersion)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
