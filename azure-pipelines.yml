@@ -21,8 +21,42 @@ variables:
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
 
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
 
 stages:
+- stage: Build & Test
+  displayName: Build & Test
+  jobs:
+  - job: BuildAndTest
+    displayName: Build & Test
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: NuGetToolInstaller@1
+    - task: NuGetCommand@2
+      inputs:
+       restoreSolution: '$(solution)'
+    - task: VSBuild@1
+      inputs:
+        solution: '$(solution)'
+        msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site"'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
+    - task: VSTest@2
+      inputs:
+        testAssemblyVer2: |
+         **\$(BuildConfiguration)\**\*Tests*.dll
+         !**\$(BuildConfiguration)\**\*Models*.dll
+         !**\*TestAdapter.dll
+         !**\obj\**
+         !**\$(BuildConfiguration)\**\*IntegrationTests*.dll
+        codeCoverageEnabled: true
+        testRunTitle: '$(Build.DefinitionName) | $(Build.Reason) |$(Build.SourceVersion)'
+        platform: '$(buildPlatform)'
+        configuration: '$(buildConfiguration)'
 - stage: Build
   displayName: Build stage
   jobs:
