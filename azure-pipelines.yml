@@ -40,3 +40,19 @@ steps:
     testRunTitle: '$(Build.DefinitionName) | $(Build.Reason) |$(Build.SourceVersion)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.Repository.LocalPath)/target'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+    OverWrite: true
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'SpringFramework_fullsources'
+    publishLocation: 'Container'
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
