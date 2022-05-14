@@ -1,0 +1,52 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-posts-deployment
+  namespace: doozy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-posts-deployment
+  template:
+    metadata:
+      labels:
+        app: mysql-posts-deployment
+    spec:
+      containers:
+        - name: mysql-posts-deployment
+          image: mysql:8.0
+          ports:
+            - containerPort: 3306
+          env:
+          - name: MYSQL_DATABASE
+            value: "postdb"
+          - name: MYSQL_USER
+            value: "mydbuser"
+          - name: MYSQL_PASSWORD
+            value: "mydbpd"
+          - name: MYSQL_ROOT_PASSWORD
+            value: "mydbpd"
+          volumeMounts:
+          - mountPath: /var/lib/mysql
+            name: mysqldb
+      volumes:
+      - name: mysqldb
+        persistentVolumeClaim:
+          claimName: mysql-deployment-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: doozy-posts-mysql
+  namespace: doozy
+spec:
+  type: ClusterIP
+  selector:
+    app: mysql-posts-deployment
+  ports:
+  - name: doozy-posts-mysql
+    protocol: TCP
+    port: 3306
+    targetPort: 3307

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-deployment
+  name: profile-deployment
   namespace: doozy
 spec:
   replicas: 1
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: doozy
-          image: 50307031/postmicroservice
+          image: 50307031/profilemicroservice
 
 ---
 
