@@ -7,14 +7,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: doozy
+      app: doozy-profile
   template:
     metadata:
       labels:
-        app: doozy
+        app: doozy-profile
     spec:
       containers:
-        - name: doozy
+        - name: doozy-profile
           image: 50307031/profilemicroservice
 
 ---
@@ -22,14 +22,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: doozy
+  name: doozy-profile
   namespace: doozy
 spec:
   type: ClusterIP
   selector:
-    app: doozy
+    app: doozy-profile
   ports:
-  - name: doozy
+  - name: doozy-profile
     protocol: TCP
     port: 80
     targetPort: 80
