@@ -23,11 +23,13 @@ spec:
               name: rbmq-mess-port
 
 ---
-# make communication in the cluster possable
+# make communication in the cluster possible
 apiVersion: v1
 kind: Service
 metadata:
   name: doozy-rabbitmq
+  labels:
+    app: rabbitmq
   namespace: doozy
 spec:
   type: ClusterIP

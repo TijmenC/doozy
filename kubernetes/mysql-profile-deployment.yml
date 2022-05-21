@@ -25,7 +25,10 @@ spec:
           - name: MYSQL_USER
             value: "mydbuser"
           - name: MYSQL_PASSWORD
-            value: "mydbpd"
+            valueFrom: 
+              secretKeyRef:
+                name: mysql-posts-deployment
+                key: MYSQL_PASSWORD
           - name: MYSQL_ROOT_PASSWORD
             value: "mydbpd"
           volumeMounts:
@@ -49,4 +52,4 @@ spec:
   - name: doozy-profile-mysql
     protocol: TCP
     port: 3306
-    targetPort: 3307
+    targetPort: 3306

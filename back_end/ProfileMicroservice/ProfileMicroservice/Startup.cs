@@ -24,13 +24,15 @@ namespace ProfileMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+			
+			//Adds RabbitMQ listener
 
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<Consumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host(new Uri("amqp://guest:guest@rabbitmq:5672"));
+                    cfg.Host(new Uri(Configuration["rabbitmqconnection:connectionString"]));
                     cfg.ReceiveEndpoint("usersQueue", ep =>
                     {
                         ep.PrefetchCount = 16;
