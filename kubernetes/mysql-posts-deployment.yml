@@ -53,17 +53,3 @@ spec:
     protocol: TCP
     port: 3306
     targetPort: 3306
----
-apiVersion: autoscaling/v1
- kind: HorizontalPodAutoscaler
- metadata:
-   name: mysql-post-deployment-autoscaler
-   namespace: doozy
- spec:
-   scaleTargetRef:
-     apiVersion: apps/v1
-     kind: Deployment
-     name: mysql-post-deployment
-   minReplicas: 1
-   maxReplicas: 5
-   targetCPUUtilizationPercentage: 75
