@@ -48,10 +48,10 @@ steps:
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutputs
-
 - task: SnykSecurityScan@1
   inputs:
     serviceConnectionEndpoint: 'Snyk Authentication'
     testType: 'app'
+    targetFile: './docker-compose.yml'
     monitorWhen: 'always'
     failOnIssues: false
