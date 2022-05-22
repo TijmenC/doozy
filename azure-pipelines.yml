@@ -52,6 +52,6 @@ steps:
   inputs:
     serviceConnectionEndpoint: 'Snyk Authentication'
     testType: 'app'
-    targetFile: './docker-compose.yml'
+    targetFile: './Doozy Application.sln'
     monitorWhen: 'always'
     failOnIssues: false
