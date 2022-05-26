@@ -99,11 +99,11 @@ spec:
         - containerPort: 60000
         resources:
           requests:
-            memory: "256Mi"
-            cpu: "256m"
+            memory: "1024Mi"
+            cpu: "1024m"
           limits:
-            memory: "256Mi"
-            cpu: "256m"
+            memory: "2048Mi"
+            cpu: "1024m"
         livenessProbe:
           exec:
             command:
