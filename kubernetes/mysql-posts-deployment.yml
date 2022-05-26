@@ -39,6 +39,7 @@ spec:
         persistentVolumeClaim:
           claimName: mysql-posts-claim
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

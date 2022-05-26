@@ -16,7 +16,6 @@ spec:
       containers:
         - name: doozy-posts
           image: 50307031/postmicroservice
-
 ---
 
 apiVersion: v1
@@ -33,18 +32,4 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 80
- ---
  
-apiVersion: autoscaling/v1
- kind: HorizontalPodAutoscaler
- metadata:
-   name: posts-deployment-autoscaler
-   namespace: doozy
- spec:
-   scaleTargetRef:
-     apiVersion: apps/v1
-     kind: Deployment
-     name: posts-deployment
-   minReplicas: 1
-   maxReplicas: 5
-   targetCPUUtilizationPercentage: 75
