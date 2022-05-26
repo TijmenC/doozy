@@ -16,6 +16,13 @@ spec:
       containers:
         - name: doozy-posts
           image: 50307031/postmicroservice
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "256m"
+            limits:
+              memory: "256Mi"
+              cpu: "256m"
 ---
 
 apiVersion: v1
