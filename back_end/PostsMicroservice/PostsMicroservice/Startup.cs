@@ -30,7 +30,7 @@ namespace PostsMicroservice
                 x.AddConsumer<Consumer>();
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host(new Uri("amqp://guest:guest@rabbitmq:5672"));
+                    cfg.Host(new Uri(Configuration["rabbitmqconnection:connectionString"]));
                     cfg.ReceiveEndpoint("postQueue", ep =>
                     {
                         ep.PrefetchCount = 16;
@@ -40,8 +40,6 @@ namespace PostsMicroservice
                 }));
             });
             services.AddControllers();
-
-           var connectionString = Configuration["mysqlconnection:connectionString"];
 
                 services.AddDbContext<DBContext>(options =>
                 {
