@@ -1,21 +1,6 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "postapi",
-          "Port": 80
-        }
-      ],
-      "RouteClaimsRequirement": {
-        "Role": "Api.ReadWrite"
-      },
-      "UpstreamPathTemplate": "/post/everything/{everything}",
-      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
-    },
-    {
       "DownstreamPathTemplate": "/api/post/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -24,8 +9,12 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "RouteClaimsRequirement": {
-        "Role": "Api.ReadOnly"
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadOnly"
       },
       "UpstreamPathTemplate": "/post/{id}",
       "UpstreamHttpMethod": [ "Get" ]
@@ -39,8 +28,9 @@
           "Port": 80
         }
       ],
-      "RouteClaimsRequirement": {
-        "Role": "Api.ReadOnly"
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
       },
       "UpstreamPathTemplate": "/post",
       "UpstreamHttpMethod": [ "Get" ]

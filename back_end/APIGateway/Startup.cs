@@ -16,6 +16,11 @@ namespace APIGateway
 {
     public class Startup
     {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
         public IConfiguration Configuration { get;  }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -25,6 +30,7 @@ namespace APIGateway
             services.AddCors();
             services.AddOcelot();
             services.AddMicrosoftIdentityWebApiAuthentication(Configuration);
+            services.DecorateClaimAuthoriser();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,8 +48,6 @@ namespace APIGateway
 
             app.UseRouting();
 
-            app.UseAuthentication();
-
             app.UseCors("AllowSpecificOrigin");
 
             app.UseEndpoints(endpoints =>
@@ -55,6 +59,10 @@ namespace APIGateway
             });
 
             app.UseOcelot().Wait();
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
         }
     }
 }
