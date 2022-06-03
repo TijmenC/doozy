@@ -9,6 +9,9 @@
           "Port": 80
         }
       ],
+      "RouteClaimsRequirement": {
+        "Role":  "Api.ReadWrite"
+      },
       "UpstreamPathTemplate": "/post/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
