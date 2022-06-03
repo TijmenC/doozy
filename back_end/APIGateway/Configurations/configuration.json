@@ -1,6 +1,25 @@
 {
   "ReRoutes": [
     {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "postapi",
+          "Port": 80
+        }
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadWrite"
+      },
+      "UpstreamPathTemplate": "/post/everything/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/post/{id}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -32,6 +51,9 @@
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       },
+      "RouteClaimsRequirement": {
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadOnly"
+      },
       "UpstreamPathTemplate": "/post",
       "UpstreamHttpMethod": [ "Get" ]
     },
@@ -44,8 +66,12 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "RouteClaimsRequirement": {
-        "Role": "Api.ReadOnly"
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadOnly"
       },
       "UpstreamPathTemplate": "/profile/{id}",
       "UpstreamHttpMethod": [ "Get" ]
@@ -59,8 +85,12 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "RouteClaimsRequirement": {
-        "Role": "Api.ReadOnly"
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadOnly"
       },
       "UpstreamPathTemplate": "/profile",
       "UpstreamHttpMethod": [ "Get" ]
@@ -74,8 +104,12 @@
           "Port": 80
         }
       ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
       "RouteClaimsRequirement": {
-        "Role": "Api.ReadWrite"
+        "http$//schemas.microsoft.com/ws/2008/06/identity/claims/role": "Api.ReadWrite"
       },
       "UpstreamPathTemplate": "/profile/everything/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
