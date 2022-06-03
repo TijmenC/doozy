@@ -10,10 +10,70 @@
         }
       ],
       "RouteClaimsRequirement": {
-        "Role":  "Api.ReadWrite"
+        "Role": "Api.ReadWrite"
       },
-      "UpstreamPathTemplate": "/post/{everything}",
+      "UpstreamPathTemplate": "/post/everything/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "postapi",
+          "Port": 80
+        }
+      ],
+      "RouteClaimsRequirement": {
+        "Role": "Api.ReadOnly"
+      },
+      "UpstreamPathTemplate": "/post/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/post",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "postapi",
+          "Port": 80
+        }
+      ],
+      "RouteClaimsRequirement": {
+        "Role": "Api.ReadOnly"
+      },
+      "UpstreamPathTemplate": "/post",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/profile/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileapi",
+          "Port": 80
+        }
+      ],
+      "RouteClaimsRequirement": {
+        "Role": "Api.ReadOnly"
+      },
+      "UpstreamPathTemplate": "/profile/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/profile",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "profileapi",
+          "Port": 80
+        }
+      ],
+      "RouteClaimsRequirement": {
+        "Role": "Api.ReadOnly"
+      },
+      "UpstreamPathTemplate": "/profile",
+      "UpstreamHttpMethod": [ "Get" ]
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -24,7 +84,10 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/profile/{everything}",
+      "RouteClaimsRequirement": {
+        "Role": "Api.ReadWrite"
+      },
+      "UpstreamPathTemplate": "/profile/everything/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ],
