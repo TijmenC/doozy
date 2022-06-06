@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-deployment
+  namespace: doozy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: doozy-profile
+  template:
+    metadata:
+      labels:
+        app: doozy-profile
+    spec:
+      containers:
+        - name: doozy-profile
+          image: 50307031/profilemicroservice
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: doozy-profile
+  namespace: doozy
+spec:
+  type: ClusterIP
+  selector:
+    app: doozy-profile
+  ports:
+  - name: doozy-profile
+    protocol: TCP
+    port: 80
+    targetPort: 80
+---
+ apiVersion: autoscaling/v1
+ kind: HorizontalPodAutoscaler
+ metadata:
+   name: profile-deployment-autoscaler
+   namespace: doozy
+ spec:
+   scaleTargetRef:
+     apiVersion: apps/v1
+     kind: Deployment
+     name: profile-deployment
+   minReplicas: 1
+   maxReplicas: 5
+   targetCPUUtilizationPercentage: 75
