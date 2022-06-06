@@ -50,8 +50,9 @@ steps:
     artifactName: MyBuildOutputs
 - task: SnykSecurityScan@1
   inputs:
-    serviceConnectionEndpoint: 'Snyk Authentication'
+    serviceConnectionEndpoint: 'Snyk Auth 2'
     testType: 'app'
     targetFile: './Doozy Application.sln'
     monitorWhen: 'always'
     failOnIssues: false
+    organization: 'e2f72bd5-f57a-4e3b-9af0-84ca811183bc'
