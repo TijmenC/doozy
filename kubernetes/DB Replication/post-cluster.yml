@@ -9,14 +9,13 @@
 # It uses self-signed TLS certificates.
 # It requires a deployed Operator (e.g., deploy/deploy-operator.yaml),
 # and requires root user credentials provided by a Kubernetes Secret;
-# the Secret is named mypwds in this case (e.g., sample-secret.yaml)
-#
+
 apiVersion: mysql.oracle.com/v2
 kind: InnoDBCluster
 metadata:
   name: post-cluster
 spec:
-  secretName: mypwds
+  secretName: mypwdspost
   instances: 3
   router:
     instances: 1
