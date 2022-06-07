@@ -33,7 +33,7 @@ steps:
     containerRegistry: 'DockerHubDoozy'
     repository: '50307031/postmicroservice'
     command: 'buildAndPush'
-    Dockerfile: './back_end/PostsMicroservice/Dockerfile'
+    Dockerfile: './back_end/PostsMicroservice/PostsMicroservice/Dockerfile'
     buildContext: './'
     tags: |
       deployment
@@ -43,7 +43,7 @@ steps:
     containerRegistry: 'DockerHubDoozy'
     repository: '50307031/profilemicroservice'
     command: 'buildAndPush'
-    Dockerfile: './back_end/ProfileMicroservice/Dockerfile'
+    Dockerfile: './back_end/ProfileMicroservice/ProfileMicroservice/Dockerfile'
     buildContext: './'
     tags: |
       deployment
