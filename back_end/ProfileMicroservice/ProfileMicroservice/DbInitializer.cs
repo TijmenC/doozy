@@ -24,15 +24,26 @@ namespace ProfileMicroservice
                     DateOfBirth =  new DateTime(2000, 2, 29),
                     DisplayName = "Eric",
                     UserName = "CoolEric",
-                    Email = "EricIsCool@gmail.com"
+                    Email = "EricIsCool@gmail.com",
+                    DeletionTime = new DateTime(2024, 5, 29)
 
                 },
-                 new User
+                new User
                 {
                     DateOfBirth =  new DateTime(2000, 2, 29),
                     DisplayName = "Patrick",
                     UserName = "CoolPatrick",
-                    Email = "PatrickIsCool@gmail.com"
+                    Email = "PatrickIsCool@gmail.com",
+                    DeletionTime = new DateTime(2024, 8, 25)
+
+                },
+                new User
+                {
+                    DateOfBirth =  new DateTime(2000, 2, 29),
+                    DisplayName = "Evelyn",
+                    UserName = "CoolEvelyn",
+                    Email = "EvelynIsCool@gmail.com",
+                    DeletionTime = new DateTime(2022, 4, 25)
 
                 },
             };
