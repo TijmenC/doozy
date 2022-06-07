@@ -7,10 +7,6 @@ trigger:
   branches:
     include:
     - main
-  paths:
-    include:
-    - back_end/APIGateway
-
 
 pool:
   vmImage: 'windows-latest'
@@ -22,7 +18,7 @@ variables:
 
 steps:
 - task: Docker@2
-  displayName: Building & Pushing to DockerHub
+  displayName: APIGateway - Building & Pushing to DockerHub
   inputs:
     containerRegistry: 'DockerHubDoozy'
     repository: '50307031/doozyrepository'
@@ -31,4 +27,23 @@ steps:
     buildContext: './'
     tags: |
       deployment
-
+- task: Docker@2
+  displayName: PostMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/postmicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/PostsMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      deployment
+- task: Docker@2
+  displayName: ProfileMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/profilemicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/ProfileMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      deployment
