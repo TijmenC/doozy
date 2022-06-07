@@ -41,7 +41,7 @@ spec:
     spec:
       containers:
         - name: api-gateway-container
-          image: 50307031/apigateway
+          image: 50307031/apigateway:dev
           imagePullPolicy: Always
           resources:
             requests:
