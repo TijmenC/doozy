@@ -48,3 +48,10 @@ steps:
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
     artifactName: MyBuildOutputs
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'Snyk Authentication'
+    testType: 'app'
+    targetFile: './Doozy Application.sln'
+    monitorWhen: 'always'
+    failOnIssues: false

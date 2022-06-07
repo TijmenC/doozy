@@ -68,13 +68,16 @@ namespace ProfileMicroservice.Controllers
         [HttpPost("SaveProfile")]
         public async Task<HttpStatusCode> InsertUser(User user)
         {
+            user.DeletionTime = DateTime.Now.AddYears(2);   
+
             var entity = new User()
             {
                 Id = user.Id,
                 DateOfBirth = user.DateOfBirth,
                 DisplayName = user.DisplayName,
                 UserName = user.UserName,
-                Email = user.Email
+                Email = user.Email,
+                DeletionTime = user.DeletionTime
             };
 
             _DBContext.Users.Add(entity);

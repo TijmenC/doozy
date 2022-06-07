@@ -9,6 +9,10 @@ using MassTransit;
 using System;
 using ProfileMicroservice.Consumers;
 using MySql.EntityFrameworkCore.Extensions;
+using Quartz.Spi;
+using Quartz;
+using Quartz.Impl;
+using ProfileMicroservice.QuartzJobs;
 
 namespace ProfileMicroservice
 {
@@ -47,6 +51,20 @@ namespace ProfileMicroservice
                 {
                     options.UseMySQL(Configuration["mysqlconnection:connectionString"]);
                 });
+
+            // Add Quartz services
+            services.AddSingleton<IJobFactory, SingletonJobFactory>();
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
+
+            // Add jobs
+
+            services.AddSingleton<DeleteUserJob>();
+            services.AddSingleton(new JobSchedule(
+                jobType: typeof(DeleteUserJob),
+                cronExpression: "0 0/1 * * * ?")); // run every minute 
+
+
+            services.AddHostedService<QuartzHostedService>();
 
             services.AddControllers();
             services.AddCors();
