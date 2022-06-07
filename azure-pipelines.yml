@@ -7,7 +7,7 @@ trigger:
 - dev
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   solution: '**/*.sln'
@@ -61,7 +61,7 @@ steps:
     Dockerfile: './back_end/APIGateway/Dockerfile'
     buildContext: './'
     tags: |
-      deployment
+      dev
 - task: Docker@2
   displayName: PostMicroservice - Building & Pushing to DockerHub
   inputs:
@@ -71,7 +71,7 @@ steps:
     Dockerfile: './back_end/PostsMicroservice/PostsMicroservice/Dockerfile'
     buildContext: './'
     tags: |
-      deployment
+      dev
 - task: Docker@2
   displayName: ProfileMicroservice - Building & Pushing to DockerHub
   inputs:
@@ -81,7 +81,7 @@ steps:
     Dockerfile: './back_end/ProfileMicroservice/ProfileMicroservice/Dockerfile'
     buildContext: './'
     tags: |
-      deployment
+      dev
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)
