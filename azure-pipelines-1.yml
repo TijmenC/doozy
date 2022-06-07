@@ -24,7 +24,7 @@ steps:
 - task: Docker@2
   displayName: Building & Pushing to DockerHub
   inputs:
-    containerRegistry: 'DoozyRegistery'
+    containerRegistry: 'DockerHubDoozy'
     repository: '50307031/doozyrepository'
     command: 'buildAndPush'
     Dockerfile: './back_end/APIGateway/Dockerfile'
