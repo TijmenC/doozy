@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: doozy-posts
-          image: 50307031/postmicroservice:dev
+          image: 50307031/postmicroservice:deployment
           resources:
             requests:
               memory: "256Mi"
