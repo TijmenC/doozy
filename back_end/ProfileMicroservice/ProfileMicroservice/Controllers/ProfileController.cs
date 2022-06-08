@@ -1,8 +1,10 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using ProfileMicroservice.DTO;
 using ProfileMicroservice.Models;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace ProfileMicroservice.Controllers
         private readonly IBus _bus;
 
         private readonly DBContext _DBContext;
+        public IConfiguration Configuration { get; }
         public ProfileController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
@@ -54,11 +57,11 @@ namespace ProfileMicroservice.Controllers
             return user;
         }
         [HttpPost("Profile")]
-        public async Task<IActionResult> CreateTicket(User user)
+        public async Task<IActionResult> CreateTicket(UserShared user)
         {
             if (user != null)
             {
-                Uri uri = new Uri("amqp://guest:guest@rabbitmq:5672/profileQueue");
+                Uri uri = new Uri(Configuration["rabbitmqconnection:connectionString"] + "/profileQueue");
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(user);
                 return Ok();

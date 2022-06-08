@@ -31,7 +31,7 @@ namespace PostsMicroservice
                 x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
                     cfg.Host(new Uri(Configuration["rabbitmqconnection:connectionString"]));
-                    cfg.ReceiveEndpoint("postQueue", ep =>
+                    cfg.ReceiveEndpoint("profileQueue", ep =>
                     {
                         ep.PrefetchCount = 16;
                         ep.UseMessageRetry(r => r.Interval(2, 100));
