@@ -1,7 +1,9 @@
 ﻿using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using PostsMicroservice.Models;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace PostsMicroservice.Controllers
         private readonly IBus _bus;
 
         private readonly DBContext _DBContext;
+        public IConfiguration Configuration { get; }
+
         public PostController(IBus bus, DBContext DBContext)
         {
             _bus = bus;
@@ -54,11 +58,11 @@ namespace PostsMicroservice.Controllers
         }
 
         [HttpPost("Post")]
-        public async Task<IActionResult> CreateTicket(Post ticket)
+        public async Task<IActionResult> CreateTicket(PostShared ticket)
         {
             if (ticket != null)
             {
-                Uri uri = new Uri("amqp://guest:guest@rabbitmq:5672/postQueue");
+                Uri uri = new Uri(Configuration["rabbitmqconnection:connectionString"] + "/postQueue");
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(ticket);
                 return Ok();

@@ -12,14 +12,30 @@ namespace ProfileMicroservice.Consumers
     public class Consumer : IConsumer<PostShared>
     {
         private readonly ILogger<Consumer> logger;
-        public Consumer(ILogger<Consumer> logger)
+
+        private readonly DBContext _DBContext;
+        public Consumer(ILogger<Consumer> logger, DBContext DBContext)
         {
             this.logger = logger;
+            _DBContext = DBContext;
         }
         public Task Consume(ConsumeContext<PostShared> context)
         {
-            var data = context.Message;
-            return null;
+            /*
+            PostShared post = new PostShared()
+            {
+                Id = context.Message.Id,
+                UserId = context.Message.Id,
+                Title = context.Message.Title,
+                Description = context.Message.Description,
+                AmountDrank = context.Message.AmountDrank,
+                DrinkType = context.Message.DrinkType
+            };
+
+            _DBContext.Posts.Add(post);
+            _DBContext.SaveChanges();
+            */
+            return Task.CompletedTask;
         }
     }
 }
