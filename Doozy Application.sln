@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostsMicroserviceTests", "b
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProfileMicroserviceTests", "back_end\ProfileMicroserviceTests\ProfileMicroserviceTests.csproj", "{32D20F5E-1320-4EA3-9333-58182C7641E0}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared.Models", "back_end\Shared.Models\Shared.Models.csproj", "{A8087CC5-E609-4344-A2BE-F9E77E1CC355}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32D20F5E-1320-4EA3-9333-58182C7641E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8087CC5-E609-4344-A2BE-F9E77E1CC355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8087CC5-E609-4344-A2BE-F9E77E1CC355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8087CC5-E609-4344-A2BE-F9E77E1CC355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8087CC5-E609-4344-A2BE-F9E77E1CC355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,5 +30,9 @@
     <PackageReference Include="Quartz" Version="3.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Shared.Models\Shared.Models.csproj" />
+  </ItemGroup>
+
 
 </Project>
