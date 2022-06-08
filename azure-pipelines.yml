@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- main
+- dev
 
 pool:
   vmImage: 'windows-latest'
@@ -44,14 +44,46 @@ steps:
   inputs:
     contents: '_buildOutput/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)
-    artifactName: MyBuildOutputs
 - task: SnykSecurityScan@1
   inputs:
-    serviceConnectionEndpoint: 'Snyk Authentication'
+    serviceConnectionEndpoint: 'Snyk Auth 2'
     testType: 'app'
     targetFile: './Doozy Application.sln'
     monitorWhen: 'always'
     failOnIssues: false
+    organization: 'e2f72bd5-f57a-4e3b-9af0-84ca811183bc'
+- task: Docker@2
+  displayName: APIGateway - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/doozyrepository'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/APIGateway/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
+- task: Docker@2
+  displayName: PostMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/postmicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/PostsMicroservice/PostsMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
+- task: Docker@2
+  displayName: ProfileMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/profilemicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/ProfileMicroservice/ProfileMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
+
