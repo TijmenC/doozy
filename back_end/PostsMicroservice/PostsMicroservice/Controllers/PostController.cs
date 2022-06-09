@@ -20,12 +20,14 @@ namespace PostsMicroservice.Controllers
         private readonly IBus _bus;
 
         private readonly DBContext _DBContext;
-        public IConfiguration Configuration { get; }
+        public IConfiguration _configuration { get; }
 
-        public PostController(IBus bus, DBContext DBContext)
+        public PostController(IBus bus, DBContext DBContext, IConfiguration configuration)
         {
             _bus = bus;
             _DBContext = DBContext;
+            _configuration = configuration;
+
         }
 
         [HttpGet("{id}")]
@@ -62,7 +64,7 @@ namespace PostsMicroservice.Controllers
         {
             if (ticket != null)
             {
-                Uri uri = new Uri(Configuration["rabbitmqconnection:connectionString"] + "/postQueue");
+                Uri uri = new Uri(_configuration["rabbitmqconnection:connectionString"] + "/postQueue"); 
                 var endPoint = await _bus.GetSendEndpoint(uri);
                 await endPoint.Send(ticket);
                 return Ok();
@@ -85,6 +87,23 @@ namespace PostsMicroservice.Controllers
 
             _DBContext.Post.Add(entity);
             await _DBContext.SaveChangesAsync();
+
+            if (Post != null && _DBContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
+            {
+                PostShared postShared = new PostShared()
+                {
+                    Id = Post.Id,
+                    UserId = Post.Id,
+                    Title = Post.Title,
+                    Description = Post.Description,
+                    AmountDrank = Post.AmountDrank,
+                    DrinkType = (Shared.Models.DrinkType)Post.DrinkType
+                };
+
+                Uri uri = new Uri(_configuration["rabbitmqconnection:connectionString"] + "/postQueue");
+                var endPoint = await _bus.GetSendEndpoint(uri);
+                await endPoint.Send(postShared);
+            }
 
             return HttpStatusCode.Created;
         }
