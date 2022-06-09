@@ -21,7 +21,7 @@ namespace ProfileMicroservice
             {
                 new User
                 {
-                    DateOfBirth =  new DateTime(2000, 2, 29),
+                    DateOfBirth =  new DateTime(2000, 1, 29),
                     DisplayName = "Eric",
                     UserName = "CoolEric",
                     Email = "EricIsCool@gmail.com",
@@ -30,7 +30,7 @@ namespace ProfileMicroservice
                 },
                 new User
                 {
-                    DateOfBirth =  new DateTime(2000, 2, 29),
+                    DateOfBirth =  new DateTime(2000, 4, 29),
                     DisplayName = "Patrick",
                     UserName = "CoolPatrick",
                     Email = "PatrickIsCool@gmail.com",
@@ -39,7 +39,7 @@ namespace ProfileMicroservice
                 },
                 new User
                 {
-                    DateOfBirth =  new DateTime(2000, 2, 29),
+                    DateOfBirth =  new DateTime(2000, 6, 29),
                     DisplayName = "Evelyn",
                     UserName = "CoolEvelyn",
                     Email = "EvelynIsCool@gmail.com",
