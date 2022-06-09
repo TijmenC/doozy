@@ -21,7 +21,6 @@ namespace ProfileMicroservice.Consumers
         }
         public Task Consume(ConsumeContext<PostShared> context)
         {
-            /*
             PostShared post = new PostShared()
             {
                 Id = context.Message.Id,
@@ -34,7 +33,7 @@ namespace ProfileMicroservice.Consumers
 
             _DBContext.Posts.Add(post);
             _DBContext.SaveChanges();
-            */
+           
             return Task.CompletedTask;
         }
     }
