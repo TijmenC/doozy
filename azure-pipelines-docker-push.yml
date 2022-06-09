@@ -3,8 +3,15 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- main
+trigger: none 
+resources:
+  pipelines:
+  - pipeline: deploymentrelease
+    source: Doozy Production Build  & Test & Push
+    trigger:
+     branches:
+      include:
+        - main
 
 pool:
   vmImage: ubuntu-latest
