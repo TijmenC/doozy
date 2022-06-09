@@ -56,7 +56,7 @@ steps:
   displayName: APIGateway - Building & Pushing to DockerHub
   inputs:
     containerRegistry: 'DockerHubDoozy'
-    repository: '50307031/doozyrepository'
+    repository: '50307031/apigateway'
     command: 'buildAndPush'
     Dockerfile: './back_end/APIGateway/Dockerfile'
     buildContext: './'
