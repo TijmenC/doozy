@@ -1,14 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: plantr-gateway-service
+  name: doozy-api
   namespace: doozy
   labels:
-    app: plantr-gateway-service
-    service: plantr-gateway-service
+    app: doozy-api
+    service: doozy-api
 spec:
   selector:
-    app: plantr-gateway-service-pod
+    app: doozy-api-pod
   ports:
     - protocol: TCP
       name: http
@@ -19,7 +19,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: plantr-gateway-service
+  name: doozy-api
   namespace: doozy
 spec:
   replicas: 1
@@ -31,12 +31,12 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: plantr-gateway-service-pod
+      app: doozy-api-pod
       version: latest
   template:
     metadata:
       labels:
-        app: plantr-gateway-service-pod
+        app: doozy-api-pod
         version: latest
     spec:
       containers:
