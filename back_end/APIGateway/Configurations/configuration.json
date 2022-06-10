@@ -5,7 +5,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "postapi",
+          "Host": "doozy-posts",
           "Port": 80
         }
       ],
@@ -17,7 +17,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "profileapi",
+          "Host": "doozy-profile",
           "Port": 80
         }
       ],

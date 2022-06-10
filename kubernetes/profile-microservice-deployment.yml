@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: doozy-profile
-          image: 50307031/profilemicroservice:deployment
+          image: profilemicroservice:deployment
 
 ---
 

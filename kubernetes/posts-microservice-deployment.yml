@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: doozy-posts
-          image: 50307031/postmicroservice:deployment
+          image: postmicroservice:deployment
           resources:
             requests:
               memory: "256Mi"
@@ -40,7 +40,7 @@ spec:
     port: 80
     targetPort: 80
 ---
- apiVersion: autoscaling/v1
+apiVersion: autoscaling/v1
  kind: HorizontalPodAutoscaler
  metadata:
    name: posts-deployment-autoscaler
