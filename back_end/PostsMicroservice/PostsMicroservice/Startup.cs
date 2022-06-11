@@ -9,6 +9,7 @@ using MassTransit;
 using System;
 using PostsMicroservice.Consumers;
 using MySql.EntityFrameworkCore.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace PostsMicroservice
 {
@@ -24,6 +25,13 @@ namespace PostsMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();
+            });
+
+            ILogger logger = loggerFactory.CreateLogger<Startup>();
+            logger.LogInformation("Example log message");
 
             services.AddMassTransit(x =>
             {
