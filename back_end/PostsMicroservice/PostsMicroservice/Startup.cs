@@ -31,7 +31,8 @@ namespace PostsMicroservice
             });
 
             ILogger logger = loggerFactory.CreateLogger<Startup>();
-            logger.LogInformation("Example log message");
+            logger.LogInformation("Updated image again!");
+
 
             services.AddMassTransit(x =>
             {

@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: profile-deployment
   namespace: doozy
+  annotations:
+      keel.sh/policy: force
+      keel.sh/trigger: poll      
+      keel.sh/pollSchedule: "@every 10s"
 spec:
   replicas: 1
   selector:
