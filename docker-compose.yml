@@ -21,7 +21,7 @@ services:
    command: --default-authentication-plugin=mysql_native_password
    restart: always
    environment: 
-     MYSQL_DATABASE: mydbname
+     MYSQL_DATABASE: Posts
      MYSQL_ROOT_PASSWORD: mydbpd
      MYSQL_USER: mydbuser
      MYSQL_PASSWORD: mydbpd
