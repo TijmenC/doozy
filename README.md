@@ -3,46 +3,51 @@
 # Kubernetes Instructions (Main)
 # Create namespace
 ```
-kubectl apply -f namespace.yaml
+kubectl apply -f namespace.yml
 ```
 # Create secrets
 
 add secrets:
 ```
-kubectl create secret generic table-mysql --from-literal=MYSQL_PASSWORD="mydbpd"
+kubectl create secret generic mysql-posts-deployment --from-literal=MYSQL_PASSWORD="mydbpd" -n doozy
+kubectl create secret generic mysql-profile-deployment --from-literal=MYSQL_PASSWORD="mydbpd" -n doozy
 ```
 
 # Persistant volume claims
 This claims starage on your machine
 ```
-kubectl apply -f mysql-posts-deployment-pvc.yaml
+kubectl apply -f mysql-posts-deployment-pvc.yml
 ```
 ```
-kubectl apply -f mysql-profile-deployment-pvc.yaml
+kubectl apply -f mysql-profile-deployment-pvc.yml
 ```
 # Databases
 This creates the databases needed for each service
 ```
-kubectl apply -f mysql-posts-deployment.yaml
+kubectl apply -f mysql-posts-deployment.yml
 ```
 ```
-kubectl apply -f mysql-profile-deployment.yaml
+kubectl apply -f mysql-profile-deployment.yml
 ```
 ```
-kubectl apply -f api-gateway.yaml
+kubectl apply -f api-gateway.yml
 ```
 # Messagebus Rabbit-MQ
 this creates the messagebus
 ```
-kubectl apply -f rabbitmq-deployment.yaml
+kubectl apply -f rabbitmq-deployment.yml
 ```
 # Services
 this creates the services
 ```
-kubectl apply -f posts-microservice-deployment.yaml
+kubectl apply -f posts-microservice-deployment.yml
 ```
 ```
-kubectl apply -f profile-microservice-deployment.yaml
+kubectl apply -f profile-microservice-deployment.yml
+```
+# Enable automatic image pulling 
+```
+kubectl apply -f keel.yml
 ```
 # Load testing (Main)
 Create the testing stack (/jmeter-k8s-starterkit-master)
@@ -57,14 +62,27 @@ View the dashboard (login:admin password: XhXUdmQ576H6e7)
 ```
 kubectl port-forward <grafana_pod_id> 3000
 ```
+# Create dashboard 
+To access the kubernetes dashboard with CPU/GPU information follow this [tutorial](https://devopscube.com/setup-grafana-kubernetes/) the files are in the kubernetes/Dashboard folder
+
+As to deploy the kubernetes build in dashboard 
+
+Create the needed files
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
+```
+Set the server live
+```
+kubectl proxy
+```
 # Database Replication (Main kubernetes/DB Replication)
 Create definitions for operator
 ```
-kubectl apply -f replication-setup.yaml
+kubectl apply -f replication-setup.yml
 ```
 Deploy operator
 ```
-kubectl apply -f deploy-operator.yaml
+kubectl apply -f deploy-operator.yml
 ```
 Create SQL Secrets for both databases
 ```
@@ -80,9 +98,9 @@ kubectl create secret generic  mypwdsprofile \
 ```
 Apply the cluster files
 ```
-kubectl apply -f profile-cluster.yaml
+kubectl apply -f profile-cluster.yml
 
-kubectl apply -f post-cluster.yaml
+kubectl apply -f post-cluster.yml
 ```
 
 # Docker Compose (Dev)
