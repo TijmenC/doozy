@@ -27,7 +27,7 @@ spec:
           - name: MYSQL_PASSWORD
             valueFrom: 
               secretKeyRef:
-                name: mysql-posts-deployment
+                name: mysql-profile-deployment
                 key: MYSQL_PASSWORD
           - name: MYSQL_ROOT_PASSWORD
             value: "mydbpd"
