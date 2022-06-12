@@ -15,14 +15,8 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'SonarCloud'
-    organization: '439702'
-    scannerMode: 'MSBuild'
-    projectKey: '439702_Doozy-Final-Repository'
-    projectName: 'Doozy Final Repository'
 - task: NuGetToolInstaller@1
+
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
@@ -50,7 +44,6 @@ steps:
   inputs:
     contents: '_buildOutput/**'
     targetFolder: $(Build.ArtifactStagingDirectory)
-- task: SonarCloudAnalyze@1
 - task: SnykSecurityScan@1
   inputs:
     serviceConnectionEndpoint: 'Snyk Auth 2'
