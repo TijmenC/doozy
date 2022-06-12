@@ -66,7 +66,7 @@ namespace PostsMicroservice
             }
 
             //DISABLE WHILE IN PRODUCTION!
-            app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            //app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseRouting();
 
