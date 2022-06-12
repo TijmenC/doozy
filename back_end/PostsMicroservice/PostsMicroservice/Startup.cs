@@ -25,15 +25,6 @@ namespace PostsMicroservice
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddConsole();
-            });
-
-            ILogger logger = loggerFactory.CreateLogger<Startup>();
-            logger.LogInformation("Updated image again!");
-
-
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<Consumer>();
