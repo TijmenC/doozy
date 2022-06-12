@@ -7,7 +7,7 @@ trigger: none
 resources:
   pipelines:
   - pipeline: deploymentrelease
-    source: Doozy Production Build  & Test & Push
+    source: Doozy Deployment Build & Test 
     trigger:
      branches:
       include:
