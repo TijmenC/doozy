@@ -1,0 +1,49 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none 
+resources:
+  pipelines:
+  - pipeline: deploymentrelease
+    source: Doozy Dev Build & Test
+    trigger:
+     branches:
+      include:
+        - dev
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: Docker@2
+  displayName: APIGateway - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/apigateway'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/APIGateway/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
+- task: Docker@2
+  displayName: PostMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/postmicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/PostsMicroservice/PostsMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
+- task: Docker@2
+  displayName: ProfileMicroservice - Building & Pushing to DockerHub
+  inputs:
+    containerRegistry: 'DockerHubDoozy'
+    repository: '50307031/profilemicroservice'
+    command: 'buildAndPush'
+    Dockerfile: './back_end/ProfileMicroservice/ProfileMicroservice/Dockerfile'
+    buildContext: './'
+    tags: |
+      dev
